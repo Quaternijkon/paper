@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
       - name: Install mdbook and dependencies
         run: |
-          tag="0.4.36"
+          tag="v0.4.36"
           url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
           tag1="0.9.3"
           url1="https://github.com/lzanini/mdbook-katex/releases/download/${tag1}-binaries/mdbook-katex-v${tag1}-x86_64-unknown-linux-gnu.tar.gz"
@@ -34,6 +34,7 @@ jobs:
           curl -sSL $url | tar -xz --directory=./mdbook
           curl -sSL $url1 | tar -xz --directory=./mdbook
           curl -sSL $url2 | tar -xz --directory=./mdbook
+          curl -sSL $url3 | tar -xz --directory=./mdbook
           echo `pwd`/mdbook >> $GITHUB_PATH
     #   - name: Install Dependencies
     #     run: |
