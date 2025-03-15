@@ -33,14 +33,16 @@ jobs:
 
           url3="https://github.com/Quaternijkon/mdbook-reading-time/releases/download/1.0.0/mdbook-reading-time-x86_64-unknown-linux-gnu.tar.gz"
 
-          url4="https://github.com/Quaternijkon/binary/releases/download/0.1.0/mdbook-alerts.tar.gz"
+          tag4="v0.7.0"
+          url4="https://github.com/Quaternijkon/binary/releases/download/${tag4}/mdbook-alerts.tar.gz"
 
           mkdir mdbook
           curl -sSL $url | tar -xz --directory=./mdbook
           curl -sSL $url1 | tar -xz --directory=./mdbook
           curl -sSL $url2 | tar -xz --directory=./mdbook
           curl -sSL $url3 | tar -xz --directory=./mdbook
-          curl -sSL $url4 | tar -xz --directory=./mdbook
+          wget -q $url4 -O mdbook/mdbook-alerts
+          chmod a+x mdbook/mdbook-alerts
 
           echo `pwd`/mdbook >> $GITHUB_PATH
     #   - name: Install Dependencies
