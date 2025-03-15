@@ -41,7 +41,7 @@ jobs:
           curl -sSL $url1 | tar -xz --directory=./mdbook
           curl -sSL $url2 | tar -xz --directory=./mdbook
           curl -sSL $url3 | tar -xz --directory=./mdbook
-          curl -sSL --output-dir ./mdbook -O "$url4"
+          curl -sSL $url4 -o ./mdbook/mdbook-alerts
           echo `pwd`/mdbook >> $GITHUB_PATH
     #   - name: Install Dependencies
     #     run: |
