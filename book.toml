@@ -28,3 +28,5 @@ assets_version = "3.0.2" # do not edit: managed by `mdbook-admonish install`
 after = ["links"]
 block-delimiter = { left = "\\[", right = "\\]" }
 inline-delimiter = { left = "\\(", right = "\\)" }
+
+[preprocessor.alerts]
