@@ -1,7 +1,7 @@
 # Summary
 
 [👋Introduction](./introduction.md)
-[]
+[🦀Plugins](./plugins.md)
 
 <!-- # vector db -->
 
