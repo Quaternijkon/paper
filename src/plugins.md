@@ -57,7 +57,7 @@
 > Negative potential consequences of an action.
 >
 
-## [REPL](https://github.com/MR-Addict/mdbook-repl)
+## [repl](https://github.com/MR-Addict/mdbook-repl)
 
 ```python
 class Greeter:
@@ -88,3 +88,11 @@ graph TD;
     B-->D;
     C-->D;
 ```
+
+## [embedify](https://github.com/MR-Addict/mdbook-embedify.git)
+
+```text
+{%这是一个空格embed bilibili id="BV1uT4y1P7CX" loading="lazy" %}
+```
+
+{% embed bilibili id="BV1uT4y1P7CX" loading="lazy" %}

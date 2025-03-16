@@ -60,6 +60,8 @@ jobs:
           mv ./mdbook/mdbook-repl-*/mdbook-repl ./mdbook/mdbook-repl
           mv ./mdbook/mdbook-embedify-*/mdbook-embedify ./mdbook/mdbook-embedify
 
+          ls ./mdbook
+
           echo `pwd`/mdbook >> $GITHUB_PATH
     #   - name: Install Dependencies
     #     run: |
