@@ -39,6 +39,10 @@ jobs:
           tag5="0.2.6"
           url5="https://github.com/MR-Addict/mdbook-repl/releases/download/${tag5}/mdbook-repl-${tag5}-x86_64-unknown-linux-gnu.zip"
 
+
+          tag6="v0.14.1"
+          url6="https://github.com/badboy/mdbook-mermaid/releases/download/${tag6}/mdbook-mermaid-${tag6}-x86_64-unknown-linux-gnu.tar.gz"
+
           mkdir mdbook
           curl -sSL $url | tar -xz --directory=./mdbook
           curl -sSL $url1 | tar -xz --directory=./mdbook

@@ -10,15 +10,13 @@ words-per-minute = 160
 
 [output.html]
 additional-css = ["theme/style.css", "./mdbook-admonish.css"]
-additional-js = ["assets/custom.js", "assets/bigPicture.js"]
+additional-js = ["assets/custom.js", "assets/bigPicture.js", "mermaid.min.js", "mermaid-init.js"]
 git-repository-url = "https://github.com/Quaternijkon/paper"
 edit-url-template = "https://github.com/Quaternijkon/paper/edit/main/{path}"
 
 [output.html.fold]
 enable = false
 level = 0
-
-[preprocessor]
 
 [preprocessor.admonish]
 command = "mdbook-admonish"
@@ -35,7 +33,11 @@ inline-delimiter = { left = "\\(", right = "\\)" }
 src = "https://mr-addict.github.io/mdbook-repl/embed/"
 
 python.enable = true
+
 python.loading = "lazy"
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
 
 # typescript.enable = true
 # typescript.loading = "lazy"

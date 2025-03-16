@@ -55,3 +55,36 @@
 
 > [!CAUTION]
 > Negative potential consequences of an action.
+>
+
+## [REPL](https://github.com/MR-Addict/mdbook-repl)
+
+```python
+class Greeter:
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self):
+        return "Hello, " + self.name
+
+g = Greeter("world")
+print(g.greet())
+```
+
+## [mermaid](https://github.com/badboy/mdbook-mermaid.git)
+
+```plaintext
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
