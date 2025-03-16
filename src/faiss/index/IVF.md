@@ -21,3 +21,18 @@ IVF索引通过聚类来缩小搜索范围。它基于 Voronoi 图的概念，
 
 ![nprobe](./img/nprobe.jpg)
 
+设置参数`nlist`来设置Voronoi的数量。
+
+## Implementation
+
+```python
+nlist = 128  # number of cells/clusters to partition data into
+
+quantizer = faiss.IndexFlatIP(d)  # how the vectors will be stored/compared
+index = faiss.IndexIVFFlat(quantizer, d, nlist)
+index.train(data)  # we must train the index to cluster into cells
+index.add(data)
+
+index.nprobe = 8  # set how many of nearest cells to search
+D, I = index.search(xq, k)
+```

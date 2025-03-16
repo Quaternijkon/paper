@@ -59,6 +59,8 @@
 
 ## [repl](https://github.com/MR-Addict/mdbook-repl)
 
+这不是 jupyter notebook，所以请把代码写在一个 codeblock 中。（你可以编辑 codeblock ）
+
 ```python
 class Greeter:
     def __init__(self, name):
@@ -70,6 +72,8 @@ class Greeter:
 g = Greeter("world")
 print(g.greet())
 ```
+
+
 
 ## [mermaid](https://github.com/badboy/mdbook-mermaid.git)
 
