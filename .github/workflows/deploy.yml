@@ -52,9 +52,9 @@ jobs:
           curl -sSL $url2 | tar -xz --directory=./mdbook
           curl -sSL $url3 | tar -xz --directory=./mdbook
           wget -q $url4 -O mdbook/mdbook-alerts
-          curl -sSL $url5 -o mdbook-repl.zip && unzip -d ./mdbook mdbook-repl.zip && rm mdbook-repl.zip
+          curl -sSL "$url5" -o temp.zip && unzip temp.zip -d ./mdbook && rm temp.zip
           curl -sSL $url6 | tar -xz --directory=./mdbook
-          curl -sSL $url7 -o mdbook-embedify.zip && unzip -d ./mdbook mdbook-embedify.zip && rm mdbook-embedify.zip
+          curl -sSL "$url7" -o temp.zip && unzip temp.zip -d ./mdbook && rm temp.zip
 
           chmod a+x mdbook/mdbook-alerts
 
