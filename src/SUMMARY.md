@@ -24,6 +24,7 @@
     - [Flat](./faiss/index/Flat.md)
     - [IVF](./faiss/index/IVF.md)
     - [HNSW](./faiss/index/HNSW.md)
+    - [PQ](./faiss/index/PQ.md)
     - [Comparison](./faiss/index/Comparison.md)
 
 - [📁Project](./project/README.md)

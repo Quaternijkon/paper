@@ -45,3 +45,9 @@ command = "mdbook-mermaid"
 # javascript.enable = true
 # javascript.loading = "lazy"
 
+[preprocessor.embedify]
+scroll-to-top.enable = true
+
+footer.enable = true
+footer.message = "[Give me a star🌟<br> ... if you love it🥰](https://github.com/Quaternijkon/paper)"
+
