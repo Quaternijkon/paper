@@ -30,3 +30,16 @@ block-delimiter = { left = "\\[", right = "\\]" }
 inline-delimiter = { left = "\\(", right = "\\)" }
 
 [preprocessor.alerts]
+
+[preprocessor.repl]
+src = "https://mr-addict.github.io/mdbook-repl/embed/"
+
+python.enable = true
+python.loading = "lazy"
+
+# typescript.enable = true
+# typescript.loading = "lazy"
+
+# javascript.enable = true
+# javascript.loading = "lazy"
+
