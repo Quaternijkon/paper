@@ -57,6 +57,8 @@ jobs:
           curl -sSL "$url7" -o temp.zip && unzip temp.zip -d ./mdbook && rm temp.zip
 
           chmod a+x mdbook/mdbook-alerts
+          mv ./mdbook/mdbook-repl-*/mdbook-repl ./mdbook/mdbook-repl
+          mv ./mdbook/mdbook-embedify-*/mdbook-embedify ./mdbook/mdbook-embedify
 
           echo `pwd`/mdbook >> $GITHUB_PATH
     #   - name: Install Dependencies
