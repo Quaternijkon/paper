@@ -226,10 +226,99 @@ xq = read_fvecs('./sift/sift_query.fvecs')
 # take just one query (there are many in sift_learn.fvecs)
 xq = xq[0].reshape(1, xq.shape[1])
 
-xq.shape
+xq.shape # (1, 128)
 
-wb.shape
+wb.shape # (1000000, 128)
 ```
 
 ### IndexPQ
 
+```python
+import faiss
+
+D = xb.shape[1]
+m = 8
+assert D % m == 0
+nbits = 8  # number of bits per subquantizer, k* = 2**nbits
+index = faiss.IndexPQ(D, m, nbits)
+```
+
+索引需要3个参数：
+- `D`：向量的维度
+- `m`：子向量的数量
+- `nbits`：每个子向量的位数
+
+> [!Tip]
+> `nbits` 定义了每个子量化器可以使用的位数,例如 `nbits` 为 11，每个子空间有2048质心。
+
+因为使用的是使用聚类的 PQ，所以必须预先训练我们的索引。（这里直接使用 `xb` 进行训练）,然后再将向量添加到索引中进行搜索
+
+```python
+index.is_trained # False
+index.train(xb)  # PQ training can take some time when using large nbits
+index.is_trained # True
+index.add(xb)
+
+dist, I = index.search(xq, k) # 在dist中返回距离，在I中返回索引。
+
+%%timeit
+index.search(xq, k) # 1.49 ms ± 49.1 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+```
+
+使用L2索引作为基准，计算召回率
+
+```python
+l2_index = faiss.IndexFlatL2(D)
+l2_index.add(xb)
+
+%%time
+l2_dist, l2_I = l2_index.search(xq, k) # CPU times: user 46.1 ms, sys: 15.1 ms, total: 61.2 ms, Wall time: 15 ms
+
+sum([1 for i in I[0] if i in l2_I]) # 50
+```
+
+搜索表现部分将放在[Comparison](../comparison.md)中讨论。
+
+### IndexIVFPQ
+
+为了进一步加快搜索时间，我们可以添加另一个步骤——使用 IVF 索引，它将减少搜索中比较的向量。
+
+首先初始化IVFPQ索引：
+
+```python
+vecs = faiss.IndexFlatL2(D)
+
+nlist = 2048  # how many Voronoi cells (must be >= k* which is 2**nbits)
+nbits = 8  # when using IVF+PQ, higher nbits values are not supported
+index = faiss.IndexIVFPQ(vecs, D, nlist, m, nbits)
+```
+
+训练，添加，搜索...
+
+```python
+index.train(xb)
+index.add(xb)
+dist, I = index.search(xq, k)
+%%timeit
+index.search(xq, k) # 86.3 µs ± 15 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+sum([1 for i in I[0] if i in l2_I]) # 34
+```
+
+搜索速度从1.49ms降低到86.3µs，但是召回率从50%降低到34%。在给定等效参数的情况下，IndexPQ 和 IndexIVFPQ 都应该能够获得相同的召回率性能。
+
+在这种情况下，提高召回率的办法是提高nprobe参数。（当nprobe=nlist时，IndexIVFPQ退化为IndexPQ）
+
+| nprobe | 召回率 | 时延 |
+|---|---|---|
+| 1 | 34 | 86.3µs |
+| 2 | 39 |  |
+| 48 | 50 |  |
+| 2048 | 50 | 1.49ms |
+
+## Conclusion
+
+|Index|高召回|低时延|低内存|
+|---|---|---|---|
+|Flat|🟢🟢🟢🟢🟢|🔴|🔴|
+|PQ|🟡🟡🟡🟡|🟡🟡🟡|🟢🟢🟢🟢🟢|
+|IVFPQ|🟡🟡🟡🟡|🟢🟢🟢🟢🟢|🟡🟡🟡🟡|

@@ -57,6 +57,6 @@ footer.message = "[*Give me a star🌟<br> ... if you love it🥰*](https://gith
 announcement-banner.enable = true
 announcement-banner.id = "{{ #word_count }}"
 announcement-banner.theme = "forest"
-announcement-banner.message = "全文字数: **{{ #word_count }}** 阅读时间: **{{ #reading_time }}**"
+announcement-banner.message = "阅读时间: **{{ #reading_time }}**"
 
 
