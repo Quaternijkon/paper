@@ -28,7 +28,7 @@ PQ并不是一种索引，而是创建复合索引中的一种Fine quantizer。
 
 ![pq](./img/pq.png)
 
-1. 切分向量
+**切分向量**
 ```python
 x = [1, 8, 3, 9, 1, 2, 9, 4, 5, 4, 6, 2]
 
@@ -43,7 +43,9 @@ D_ = int(D / m)
 u = [x[row:row+D_] for row in range(0, D, D_)]
 print(u)
 ```
-2. 创建聚类
+**创建聚类**
+    为方便起见，这里随机生成聚类中心。
+    再现值（reproduction values）：用\(c_{ji}\)表示第\(j\)个子向量的第\(i\)个所选质心。
 ```python
 k = 2**5
 assert k % m == 0
@@ -63,7 +65,8 @@ for j in range(m):
     # add subspace list of centroids to overall list
     c.append(c_j)
 ```
-
+    定义函数计算L2距离和寻找最近邻居
+    `ids`记录距离每个子向量最近的质心的标识符。
 ```python
 def euclidean(v, u):
     distance = sum((x - y) ** 2 for x, y in zip(v, u)) ** .5
@@ -84,7 +87,7 @@ for j in range(m):
     ids.append(i)
 print(ids)
 ```
-
+    q是用质心坐标表示的向量。
 ```python
 q = []
 for j in range(m):
@@ -94,7 +97,38 @@ for j in range(m):
 print(q)
 ```
 
-~~~admonish success collapsible=true, title='完整代码'
+~~~admonish example
+
+假设：
+```python
+u = [[1, 8, 3], [9, 1, 2], [9, 4, 5], [4, 6, 2]]
+```
+我们有 `m=4` 个子空间，每个 `u[j]` 都有 `k_=8` 个可选的簇心 `c[j]`。
+
+代码执行 `nearest(c[j], u[j])`，找到 `u[j]` 在 `c[j]` 里的最近簇心：
+```python
+ids = [7, 1, 5, 3]
+```
+这意味着：
+- `u[0] = [1, 8, 3]` 在 `c[0]` 里最接近 `c[0][7]`
+- `u[1] = [9, 1, 2]` 在 `c[1]` 里最接近 `c[1][1]`
+- `u[2] = [9, 4, 5]` 在 `c[2]` 里最接近 `c[2][5]`
+- `u[3] = [4, 6, 2]` 在 `c[3]` 里最接近 `c[3][3]`
+
+然后 `q` 通过 `ids` 找到这些簇心，并拼接：
+```python
+q = []
+for j in range(m):
+    c_ji = c[j][ids[j]]  # 取出最近的簇心
+    q.extend(c_ji)       # 展开并拼接
+```
+最终：
+```python
+q = c[0][7] + c[1][1] + c[2][5] + c[3][3]
+```
+~~~
+
+~~~admonish success
 ```python
 x = [1, 8, 3, 9, 1, 2, 9, 4, 5, 4, 6, 2]
 
@@ -154,3 +188,48 @@ for j in range(m):
 print(q)
 ```
 ~~~
+
+## Implementation in Faiss
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BMYBwbkbVec?si=jUPoNcsXxWUDcUja" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+在开始之前，我们需要获取数据。我们将使用 Sift1M 数据集。
+
+```python
+import shutil
+import urllib.request as request
+from contextlib import closing
+
+# first we download the Sift1M dataset
+with closing(request.urlopen('ftp://ftp.irisa.fr/local/texmex/corpus/sift.tar.gz')) as r:
+    with open('sift.tar.gz', 'wb') as f:
+        shutil.copyfileobj(r, f)
+
+import tarfile
+
+# the download leaves us with a tar.gz file, we unzip it
+tar = tarfile.open('sift.tar.gz', "r:gz")
+tar.extractall()
+
+import numpy as np
+
+# now define a function to read the fvecs file format of Sift1M dataset
+def read_fvecs(fp):
+    a = np.fromfile(fp, dtype='int32')
+    d = a[0]
+    return a.reshape(-1, d + 1)[:, 1:].copy().view('float32')
+
+# data we will search through
+wb = read_fvecs('./sift/sift_base.fvecs')  # 1M samples
+# also get some query vectors to search with
+xq = read_fvecs('./sift/sift_query.fvecs')
+# take just one query (there are many in sift_learn.fvecs)
+xq = xq[0].reshape(1, xq.shape[1])
+
+xq.shape
+
+wb.shape
+```
+
+### IndexPQ
+

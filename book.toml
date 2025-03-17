@@ -22,6 +22,9 @@ level = 0
 command = "mdbook-admonish"
 assets_version = "3.0.2" # do not edit: managed by `mdbook-admonish install`
 
+[preprocessor.admonish.default]
+collapsible = true
+
 [preprocessor.katex]
 after = ["links"]
 block-delimiter = { left = "\\[", right = "\\]" }
@@ -49,5 +52,11 @@ command = "mdbook-mermaid"
 scroll-to-top.enable = true
 
 footer.enable = true
-footer.message = "[Give me a star🌟<br> ... if you love it🥰](https://github.com/Quaternijkon/paper)"
+footer.message = "[*Give me a star🌟<br> ... if you love it🥰*](https://github.com/Quaternijkon/paper)"
+
+announcement-banner.enable = true
+announcement-banner.id = "{{ #word_count }}"
+announcement-banner.theme = "forest"
+announcement-banner.message = "全文字数: **{{ #word_count }}** 阅读时间: **{{ #reading_time }}**"
+
 
