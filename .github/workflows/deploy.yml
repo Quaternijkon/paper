@@ -46,6 +46,8 @@ jobs:
           tag7="0.2.11"
           url7="https://github.com/MR-Addict/mdbook-embedify/releases/download/${tag7}/mdbook-embedify-${tag7}-x86_64-unknown-linux-gnu.zip"
 
+          url8="https://github.com/Quaternijkon/mdbook-suiji/releases/download/0.1.0/mdbook-suiji-x86_64-unknown-linux-gnu.tar.gz"
+
           mkdir mdbook
           curl -sSL $url | tar -xz --directory=./mdbook
           curl -sSL $url1 | tar -xz --directory=./mdbook
@@ -55,6 +57,7 @@ jobs:
           curl -sSL "$url5" -o temp.zip && unzip temp.zip -d ./mdbook && rm temp.zip
           curl -sSL $url6 | tar -xz --directory=./mdbook
           curl -sSL "$url7" -o temp.zip && unzip temp.zip -d ./mdbook && rm temp.zip
+          curl -sSL $url8 | tar -xz --directory=./mdbook
 
           chmod a+x mdbook/mdbook-alerts
           mv ./mdbook/mdbook-repl-*/mdbook-repl ./mdbook/mdbook-repl

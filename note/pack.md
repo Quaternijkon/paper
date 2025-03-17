@@ -6,5 +6,5 @@ How to pack the binary file.
 
     cd target/x86_64-unknown-linux-gnu/release
 
-    tar -czvf my_project-x86_64-unknown-linux-gnu.tar.gz my_project
+    tar -czvf mdbook-xxx-x86_64-unknown-linux-gnu.tar.gz mdbook-xxx
 

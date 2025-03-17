@@ -9,6 +9,8 @@ title = ""
 words-per-minute = 160
 words-bias = 1241
 
+[preprocessor.random-number]
+
 [output.html]
 additional-css = ["theme/style.css", "./mdbook-admonish.css"]
 additional-js = ["assets/custom.js", "assets/bigPicture.js", "mermaid.min.js", "mermaid-init.js"]
