@@ -9,7 +9,7 @@ title = ""
 words-per-minute = 160
 words-bias = 1241
 
-[preprocessor.random-number]
+[preprocessor.suiji]
 
 [output.html]
 additional-css = ["theme/style.css", "./mdbook-admonish.css"]
