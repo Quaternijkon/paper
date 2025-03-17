@@ -15,7 +15,7 @@
 
 HNSW将NSW分解成多层来构建，每个新增的层都消除了一些顶点到顶点的中间连接。
 
-![HNSW](./img/HNSW.png)
+![HNSW](./img/hnsw.png)
 
 ## Implementation
 

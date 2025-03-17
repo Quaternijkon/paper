@@ -1,1 +1,3 @@
 # hnswlib
+
+{{ #word_count }}
