@@ -67,12 +67,18 @@ HNSW是NSW的自然演进，为NSW添加层次结构生成的图结构其中的�
 
 向量插入到哪一层是由`m_L`（`level mutilplier`）决定的，当`m_L`为0时表示向量仅插入到第0层，向量会被插入到该层及其以下所有层。
 
+![HNSWConstruction](./img/hnswconstruct.png)
+
 > [!NOTE]
 > 当最小化重复跨层共享的邻居（每一个顶点都会出现在下面的层，但是边（邻居关系）不是，这条规则的目的是减少跨层重复的边），可以获得最佳性能。
 >
 > 减少`m_L`可以帮助最小化重叠（将更多的向量推送到0层），但这会增加搜索期间遍历的次数。
 >
-> 因此需要权衡`m_L`的值。一个经验值是
+> 因此需要权衡`m_L`的值。一个经验值是\( \frac{1}{\ln(M)} \)
+
+<!-- 向量插入图中的过程：
+1. 第一阶段：找到待插入的层级和位置
+   1. 从顶层开始，找到 -->
 
 ## Implementation
 
@@ -97,3 +103,52 @@ D, I = index.search(wb, k)
 |   | M | efSearch | efConstruction |
 |---|---|----------|----------------|
 | 含义 | 每个顶点的连接数 | 搜索时队列的长度 | 构建时队列的长度 |
+
+
+**分析**
+
+初始化HNSW
+
+```python
+# setup our HNSW parameters
+d = 128  # vector size
+M = 32
+
+index = faiss.IndexHNSWFlat(d, M)
+print(index.hnsw) #<faiss.swigfaiss.HNSW; proxy of <Swig Object of type 'faiss::HNSW *' at 0x7f91183ef120> >
+```
+
+M_max 值默认设置为M ， M_max0设置为M*2 
+
+在使用index.add(xb)构建index之前，我们会发现层数（或 Faiss 中的级别）尚未设置：
+
+```python
+# the HNSW index starts with no levels
+index.hnsw.max_level # -1
+
+# and levels (or layers) are empty too
+levels = faiss.vector_to_array(index.hnsw.levels)
+np.bincount(levels) # array([], dtype=int64)
+```
+
+如果我们继续建立索引，我们会发现这两个参数现在都已设置。
+
+```python
+index.add(xb)
+
+# after adding our data we will find that the level
+# has been set automatically
+index.hnsw.max_level # 4
+
+# and levels (or layers) are now populated
+levels = faiss.vector_to_array(index.hnsw.levels)
+np.bincount(levels) # array([     0, 968746,  30276,    951,     26,      1], dtype=int64)
+```
+
+甚至可以找到哪个向量是我们的入口点：
+
+```python
+index.hnsw.entry_point # 118295
+```
+
+HNSW不同参数下性能表现部分将放在[Comparison](../comparison.md)中讨论。

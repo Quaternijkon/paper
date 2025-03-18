@@ -36,3 +36,4 @@ index.add(data)
 index.nprobe = 8  # set how many of nearest cells to search
 D, I = index.search(xq, k)
 ```
+
