@@ -7,7 +7,7 @@ title = ""
 
 [preprocessor.reading-time]
 words-per-minute = 160
-words-bias = 1240
+words-bias = 1242
 
 [preprocessor.suiji]
 
