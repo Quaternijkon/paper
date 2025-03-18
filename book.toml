@@ -7,7 +7,7 @@ title = ""
 
 [preprocessor.reading-time]
 words-per-minute = 160
-words-bias = 1250
+words-bias = 1246
 
 [preprocessor.suiji]
 
@@ -60,6 +60,6 @@ footer.message = "[*Give me a star*🌟<br> ... *if you love it*🥰](https://gi
 announcement-banner.enable = true
 announcement-banner.id = "{{ #random_number }}"
 announcement-banner.theme = "forest"
-announcement-banner.message = "全文字数: **{{ #word_count }}**&nbsp;阅读时间: **{{ #reading_time }}**"
+announcement-banner.message = "字数: **{{ #word_count }}**&nbsp;时间: **{{ #reading_time }}**"
 
 
