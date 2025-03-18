@@ -3,7 +3,7 @@ authors = ["Quaternijkon"]
 language = "zh-CN"
 # multilingual = false
 src = "src"
-title = ""
+title = "锟斤拷烫烫烫"
 
 [preprocessor.reading-time]
 words-per-minute = 160
