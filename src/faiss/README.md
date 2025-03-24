@@ -24,7 +24,7 @@ Faiss的使用说明和相关知识。
 
 ## Hierarchy
 
-The CPU Faiss class hierarchy looks like this:
+The CPU Faiss class hierarchy looks like this:[faiss_class_hierarchy.pdf](https://github.com/facebookresearch/faiss/wiki/faiss_class_hierarchy.pdf)
 
 ![Faiss Class Hierarchy](./img/faiss_class_hierarchy.svg)
 
