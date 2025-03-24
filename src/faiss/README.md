@@ -22,6 +22,10 @@ Faiss的使用说明和相关知识。
 |----------------------|----------------------|--------------------|---------------|
 | PCA, OPQ, RR, L2norm, ITQ, Pad | IVF, Flat, IMI, IVF-HNSW, IVF-PQ, IVF-RCQ, HNSW-Flat, HNSW-SQ, HNSW-PQ | Flat, **PQ**, **SQ**, *Residual*, RQ, LSQ, ZnLattice, LSH | RFlat, Refine* |
 
+## Hierarchy
 
+The CPU Faiss class hierarchy looks like this:
+
+![Faiss Class Hierarchy](./img/faiss_class_hierarchy.svg)
 
 > [Faiss: The Missing Manual](https://www.pinecone.io/learn/series/faiss/)
