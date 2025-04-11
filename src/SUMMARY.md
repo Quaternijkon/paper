@@ -37,6 +37,7 @@
 
 - [💻Presentation](./presentation/README.md)
   - [DiskANN](./presentation/250306-DiskANN.md)
+  - [HNSW](./presentation/HNSW.html)
 
 
 ---
