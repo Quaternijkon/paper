@@ -33,7 +33,7 @@ after = ["links"]
 block-delimiter = { left = "\\[", right = "\\]" }
 inline-delimiter = { left = "\\(", right = "\\)" }
 
-[preprocessor.alerts]
+# [preprocessor.alerts]
 
 [preprocessor.repl]
 src = "https://mr-addict.github.io/mdbook-repl/embed/"
@@ -42,8 +42,8 @@ python.enable = true
 
 python.loading = "lazy"
 
-[preprocessor.mermaid]
-command = "mdbook-mermaid"
+# [preprocessor.mermaid]
+# command = "mdbook-mermaid"
 
 # typescript.enable = true
 # typescript.loading = "lazy"
