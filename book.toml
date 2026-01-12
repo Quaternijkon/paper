@@ -5,9 +5,9 @@ language = "zh-CN"
 src = "src"
 title = "锟斤拷烫烫烫"
 
-[preprocessor.reading-time]
-words-per-minute = 160
-words-bias = 1242
+# [preprocessor.reading-time]
+# words-per-minute = 160
+# words-bias = 1242
 
 [preprocessor.suiji]
 
