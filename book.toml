@@ -35,12 +35,12 @@ inline-delimiter = { left = "\\(", right = "\\)" }
 
 # [preprocessor.alerts]
 
-[preprocessor.repl]
-src = "https://mr-addict.github.io/mdbook-repl/embed/"
+# [preprocessor.repl]
+# src = "https://mr-addict.github.io/mdbook-repl/embed/"
 
-python.enable = true
+# python.enable = true
 
-python.loading = "lazy"
+# python.loading = "lazy"
 
 # [preprocessor.mermaid]
 # command = "mdbook-mermaid"
