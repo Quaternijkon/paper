@@ -12,8 +12,8 @@ title = "锟斤拷烫烫烫"
 # [preprocessor.suiji]
 
 [output.html]
-additional-css = ["theme/style.css", "./mdbook-admonish.css"]
-additional-js = ["assets/custom.js", "assets/bigPicture.js", "mermaid.min.js", "mermaid-init.js"]
+# additional-css = ["theme/style.css", "./mdbook-admonish.css"]
+# additional-js = ["assets/custom.js", "assets/bigPicture.js", "mermaid.min.js", "mermaid-init.js"]
 git-repository-url = "https://github.com/Quaternijkon/paper"
 edit-url-template = "https://github.com/Quaternijkon/paper/edit/main/{path}"
 
