@@ -22,13 +22,13 @@ jobs:
           fetch-depth: 0
       - name: Install mdbook and dependencies
         run: |
-          tag="v0.5.2"
+          tag="v0.4.36"
           url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
 
           tag1="0.9.3"
           url1="https://github.com/lzanini/mdbook-katex/releases/download/${tag1}-binaries/mdbook-katex-v${tag1}-x86_64-unknown-linux-gnu.tar.gz"
 
-          tag2="v1.20.0"
+          tag2="v1.19.0"
           url2="https://github.com/tommilligan/mdbook-admonish/releases/download/${tag2}/mdbook-admonish-${tag2}-x86_64-unknown-linux-gnu.tar.gz"
 
           url3="https://github.com/Quaternijkon/mdbook-reading-time/releases/download/1.1.2/mdbook-reading-time-x86_64-unknown-linux-gnu.tar.gz"
